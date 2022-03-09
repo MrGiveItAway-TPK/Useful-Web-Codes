@@ -12,6 +12,8 @@ $hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*6
 $minutes = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ 60);
 $seconds = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minutes*60));
 
-echo $Diffrence = $years."y ".$months."m ".$days."d ".$hours."h ".$minutes."m ".$seconds."s";
+$Diffrence = $years."y ".$months."m ".$days."d ".$hours."h ".$minutes."m ".$seconds."s";
+
+echo "From: ".date('Y-m-d H:i:s',$START)."<br>To: ".date('Y-m-d H:i:s',$END)."<br><br>Diffrence: ".$Diffrence."";
 
 ?>

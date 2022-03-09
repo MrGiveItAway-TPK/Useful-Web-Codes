@@ -5,7 +5,7 @@ table {
 	text-align:center;
 }
 td, tr {
-	border:1px solid black;
+	border:0.5px solid black;
 }
 input {
 	width: -webkit-fill-available;
@@ -115,7 +115,7 @@ TaxSum[i]+=+Unit_Tax_Value_Calc[X].value;
 for (var X = 0; X < TaxSum.length; X++)
 {
 if(TaxSum[X]!=0)
-document.getElementById('ChangableTAX_TR').innerHTML+='<tr><td>Total Tax '+X+'%</td><td><input type="text" readonly value="'+TaxSum[X]+'"></td></tr>';
+document.getElementById('ChangableTAX_TR').innerHTML+='<tr><td>Total Tax '+X+'%</td><td><input type="text" readonly value="'+TaxSum[X].toFixed(3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'"></td></tr>';
 }
 }
 var intervalId = window.setInterval(function(){
