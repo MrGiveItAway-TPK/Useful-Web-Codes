@@ -35,7 +35,7 @@ $stmt = mysqli_query($conn,$sql) or die( mysqli_error($conn));
 }
 else
 {
-$sql = "UPDATE otp SET OTP=N'$rr',OTP_Date='$OTP_Date' WHERE User_ID='$User_ID'";
+$sql = "UPDATE otp SET OTP=N'$rr',OTP_Date='$OTP_Date',OTP_Time='$OTP_Time' WHERE User_ID='$User_ID' AND OTP_Date='$OTP_Date'";
 
 $stmt = mysqli_query($conn,$sql) or die( mysqli_error($conn));
 }
