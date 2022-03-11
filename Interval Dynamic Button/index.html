@@ -1,0 +1,92 @@
+<style>
+.center {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	height:40vh;
+	width:40vw;
+	border:5px solid black;
+	display: table;
+}
+
+.center_div_elements {
+	display: table-cell;
+	vertical-align: middle;
+	text-align:center
+}
+button {
+  background-color: black;
+  color: white;
+  padding: 10px 27px;
+  text-align: center;
+  cursor: pointer;
+  border:1px solid transparent;
+}
+
+button:hover {
+  background-color: white	;
+  color:black;
+  border:1px solid black;
+}
+</style>
+
+<script>
+    function colorchange() {
+        if(document.getElementById('h_text').style.color=='red') {
+		
+			var h_text = document.querySelectorAll("[id='h_text']");
+			
+			for(var i = 0; i < h_text.length; i++) 
+			{
+			h_text[i].style.color='blue';
+			}
+			
+			document.getElementById('border_div').style.border='5px solid red';
+        }
+        else {
+		
+            var h_text = document.querySelectorAll("[id='h_text']");
+			
+			for(var i = 0; i < h_text.length; i++) 
+			{
+			h_text[i].style.color='red';
+			}
+			
+			document.getElementById('border_div').style.border='5px solid blue';
+        }
+    }
+	
+    var interval=null;
+	
+    function startrefresh() {
+        interval = setInterval(colorchange, 100);
+        document.getElementById("interval_button").setAttribute('onclick',  'stoprefresh();');
+		document.getElementById('interval_button').innerHTML='Stop';
+    }
+	
+    function stoprefresh() {
+        clearInterval(interval);
+        document.getElementById("interval_button").setAttribute('onclick',  'startrefresh();');
+		document.getElementById('interval_button').innerHTML='Start';
+		
+		var h_text = document.querySelectorAll("[id='h_text']");
+		
+			for(var i = 0; i < h_text.length; i++) 
+			{
+			h_text[i].style.color='black';
+			}
+			
+		document.getElementById('border_div').style.border='5px solid black';
+    }
+</script>
+
+<div id="border_div" class="center">
+	<div class="center_div_elements">
+		<h1 id="h_text">Munes Bani Fawaz</h1>
+		<h3 id="h_text">JS / CSS : Interval Dynamic Button Example</h3>
+		<h3 id="h_text">Warning: This May Disturb Your Eyes!</h3>
+		<button id="interval_button" onclick="startrefresh();">Start</button>
+	</div>
+</div>
