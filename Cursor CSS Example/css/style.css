@@ -1,0 +1,55 @@
+.center {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	height:60vh;
+	width:40vw;
+	border:5px solid black;
+	display: table;
+}
+
+.center_div_elements {
+	display: table-cell;
+	vertical-align: middle;
+	text-align:center
+}
+
+.div_box {
+    border: 2px solid black;
+    width: 10vw;
+    height: 10vh;
+    display: inline-block;
+    margin: 5px;
+    text-align: center;
+	
+}
+
+.wait {
+  cursor: wait;
+}
+
+.help {
+  cursor: help;
+}
+
+.crosshair {
+    cursor: crosshair;
+}
+
+.grab {
+    cursor: grab;
+}
+
+.smiley_face {
+	cursor: url("../images/emojis/smiley_face.png"), auto;
+}
+  
+.sad_face { 
+	cursor: url("../images/emojis/sad_face.png"), auto;
+}
+
+.globe { 
+	cursor: url("../images/globe.png"), auto;
+}
