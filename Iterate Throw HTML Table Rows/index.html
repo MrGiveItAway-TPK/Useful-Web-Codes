@@ -1,0 +1,81 @@
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<style>
+table {
+  border-collapse: collapse;
+  width:30vw;
+  font-size:20px;
+}
+
+td, th {
+  border: 1px solid black;
+  text-align: center;
+}
+</style>
+<table id="data_table">
+  <tr>
+    <th colspan=2>Example 1 (Onclick)</th>
+  </tr>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Munes</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Munes</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Abood</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Abood</td>
+  </tr>
+</table>
+<br>
+<button onclick="Iterate('data_table');">Click To Remove Duplicated Rows Based On ID</button>
+<br><br>
+<table id="data_table_2">
+  <tr>
+    <th colspan=2>Example 2 (Document.Ready)</th>
+  </tr>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Munes</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Munes</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Abood</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Abood</td>
+  </tr>
+</table>
+<script>
+
+function Iterate(table) {
+	var t = document.getElementById(table);
+	for (var i = 1, row; row = t.rows[i]; i++) {
+		var td_row = $("td:nth-child(1)", $(t.rows[i])).text();
+		var td_next_row = $("td:nth-child(1)", $(t.rows[i+1])).text();
+		if(td_row==td_next_row){
+		$(t.rows[i+1]).remove();
+		}	
+}
+}
+
+$(document).ready(function() {Iterate('data_table_2');});
+</script>
