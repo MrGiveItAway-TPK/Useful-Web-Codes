@@ -1,0 +1,238 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+table {
+  border-collapse: collapse;
+  width:99%;
+  font-size:18px;
+  margin:auto;
+  margin-top:1vh;
+  margin-bottom:1vh;
+}
+td, th {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.center {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	height:65vh;
+	width:40vw;
+	border:5px solid black;
+	display: table;
+}
+
+.center_div_elements {
+	display: table-cell;
+	vertical-align: middle;
+	text-align:center
+}
+button {
+  background-color: black;
+  color: white;
+  padding: 10px 27px;
+  text-align: center;
+  cursor: pointer;
+  border:1px solid transparent;
+  width: 10vw;
+}
+
+button:hover {
+  background-color: white	;
+  color:black;
+  border:1px solid black;
+}
+</style>
+<div class="center">
+	<div class="center_div_elements">
+		<h2>Table Rows Matcher And Sorter</h2>
+		<h3>Munes Bani Fawaz</h3>
+		<table id="data_table">
+			<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+			</thead>
+			</tr>
+			<tr>
+				<td>Munes</td>
+				<td>Bani Fawaz</td>
+			</tr>
+			<tr>
+				<td>Abood</td>
+				<td>Frehat</td>
+			</tr>
+			<tr>
+				<td>Munes</td>
+				<td>Bani Fawaz</td>
+			</tr>
+			
+			<tr>
+				<td>Abood</td>
+				<td>Taha</td>
+			</tr>
+			<tr>
+				<td>Wesam</td>
+				<td>Daabes</td>
+			</tr>
+			<tr>
+				<td>Muhammad</td>
+				<td>Bani Fawaz</td>
+			</tr>
+			<tr>
+				<td>Wesam</td>
+				<td>Daabes</td>
+			</tr>
+			<tr>
+				<td>Adam</td>
+				<td>Al Azzam</td>
+			</tr>
+			<tr>
+				<td>Muhammad</td>
+				<td>Bani Fawaz</td>
+			</tr>
+			<tr>
+				<td>Mahdi</td>
+				<td>Alfrehat</td>
+			</tr>
+			<tr>
+				<td>Muhammad</td>
+				<td>Bani Fawaz</td>
+			</tr>
+			<tr>
+				<td>Wajdy</td>
+				<td>Frehat</td>
+			</tr>
+			<tr>
+				<td>Wajdy</td>
+				<td>Taha</td>
+			</tr>
+			<tr>
+				<td>Adam</td>
+				<td>Al Azzam</td>
+			</tr>
+			<tr>
+				<td>Mahdi</td>
+				<td>Alfrehat</td>
+			</tr>
+		</table>
+		<br>	
+		<label style="float:left;margin-left:5vw;">Total Duplicated Data:</label>
+		<label style="float:left;" id="TDD">0</label>
+		<label>Total Unique Cases:</label>
+		<label id="TUC">0</label>
+		<label style="float:right;margin-right:5vw;" id="TDC">0</label>
+		<label style="float:right;">Total Duplication Cases:</label>
+		<br><br><br><button onclick="Calculate();">Calculate</button>
+		<button onclick="Highlight();">Highlight</button>
+		<button onclick="sortTable();">Sort</button>	
+	</div>
+</div>
+<script>
+//Declare Used Variables
+var Dataset_Array = []; //To Store Found Instances Of Data In An Array
+var Colors = ["Deleted","lightgreen", "lightcyan", "lightcoral", "lightyellow", "lightsalmon"]; //First Color Is Deleted Because Later In The Higlighting Fucntionallity We Lost The First Array Index Because We Are Using Array.Shift()
+var Dataset_Object = {}; //An Object Where We Will Save Data About The Data That Is In The Array (Duplicated) With A Counter Of How Many Times
+var Data=""; //A String Where We Combine Cells Of Data From The Table
+var Table_Rows = $("#data_table tr").not('thead tr'); //Selector So We Work On Whole Table Exept Header
+
+//Prepare Data
+Table_Rows.each(function() {
+
+var column_1=$(this).find("td:eq(0)").text(); //Find First Cell Text In Row
+var column_2=$(this).find("td:eq(1)").text(); //Find Second Cell Text In Row
+
+Data=column_1+" "+column_2; //Combine First + Second Row Cells Text Into A String
+
+if(Dataset_Array.indexOf(Data) !== -1) //If Data Is Already In Array We Increase That Datas Counter Inside The Object
+	{
+	Dataset_Object[Data] = Dataset_Object[Data]+1;
+	}
+	else //If Data Is Not Already In Array We Add It To Array AND SET That Datas Counter Inside The Object To 1 (To Count Itself)
+	{
+	Dataset_Object[Data] = 1;
+	Dataset_Array.push(Data);
+	}
+});
+
+//Count Duplication Cases And Data + Unique Cases
+function Calculate() {
+
+//Counters
+var Total_Duplicated_Data=0;
+var Total_Duplication_Cases=0;
+var Total_Unique_Cases=0;
+
+for (var key of Object.keys(Dataset_Object)) {
+		if(Dataset_Object[key]>1) //In The Object We Only Want Things That Are Duplicated So the Counter(key of object)>1 Is Used Inorder to Check That
+		{
+		Total_Duplicated_Data+=Dataset_Object[key];
+		Total_Duplication_Cases++;
+		}
+		else // In The Object If It's Counter(key of object)<1 Its Obviously Unique
+		{
+		Total_Unique_Cases++;
+		}
+    }
+//Show Data
+document.getElementById("TDD").innerHTML=Total_Duplicated_Data;
+document.getElementById("TDC").innerHTML=Total_Duplication_Cases;
+document.getElementById("TUC").innerHTML=Total_Unique_Cases;
+}
+
+function Highlight() {
+//Highlighting Rows In Table
+for (var key of Object.keys(Dataset_Object)) { //Looping Through Each Data In The Object
+	//var random_color = Math.floor(Math.random()*16777215).toString(16); //Either Use This For Random Colors Or Declare In Array Preferred Colors
+	if(Dataset_Object[key]>1) {Colors.shift();} // If The Current Datas Counter That We Are Checking Is >1 (Duplicated) We Change The Color So When We Loop Through The Objects The Color Only Shifts On Duplications
+	Table_Rows.each(function() { //Looping Through Each Row In The Table (Except Header)
+	var column_1=$(this).find("td:eq(0)").text();
+	var column_2=$(this).find("td:eq(1)").text();
+	Data=column_1+" "+column_2;
+		if(Dataset_Object[key]>1 && Data==key) //Whilst We Are Looping Through The Rows We Check if The Data is A Duplication (To Only Highlight Those Type Of Records) AND If The Data In This Row = The Data In The Current Object Loop In Order To Color It Before Switching To The Next Object Iteration And Change The Color
+		{
+		$(this).css('backgroundColor', Colors[0] /*Or random_color*/);
+		}
+});
+}
+}
+
+//Sort Table Alphabetically (Directly From W3Shools)
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("data_table");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      //check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+</script>
