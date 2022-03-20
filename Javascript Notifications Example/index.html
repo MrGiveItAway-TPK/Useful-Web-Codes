@@ -1,0 +1,22 @@
+<script src="js/functions.js"></script>
+<script src="js/notification.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="css/style.css">
+
+<div class="center">
+	<div class="center_div_elements">
+	<i class="fa-solid fa-bell" id="NotifyBell"><b id="NotifyBell_B">0</b></i>
+		<h1>Test Notification</h1>
+		<h3>Munes Bani Fawaz</h3>
+		<button onclick="Notify();">Notify</button>
+		<button onclick="Clear_Notify();">Clear Notify</button>
+		<button onclick="Deduct_Notify();">Deduct Notify</button>
+		<div class="msg">
+		</div>
+	</div>
+</div>
+
+<script>
+let Notify_Icon=document.getElementById('NotifyBell');
+let Notify_B=document.getElementById('NotifyBell_B');
+</script>

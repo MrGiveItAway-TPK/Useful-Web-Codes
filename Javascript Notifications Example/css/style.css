@@ -1,0 +1,43 @@
+#NotifyBell_B {
+margin-left:0.5vw;
+}
+.red {
+color:red;
+}
+.center {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	height:40vh;
+	width:40vw;
+	border:5px solid black;
+	display: table;
+}
+
+.center_div_elements {
+	display: table-cell;
+	vertical-align: middle;
+	text-align:center
+}
+.msg {
+	color:red;
+	margin-top:2vh;
+	font-size:20px;
+}
+button {
+  background-color: black;
+  color: white;
+  padding: 10px 27px;
+  text-align: center;
+  cursor: pointer;
+  border:1px solid transparent;
+  width:10vw;
+}
+
+button:hover {
+  background-color: white	;
+  color:black;
+  border:1px solid black;
+}
