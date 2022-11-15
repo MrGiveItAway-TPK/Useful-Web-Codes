@@ -1,0 +1,12 @@
+body
+{
+  padding: 50px;
+  background-color: #fcfcfc;  
+}
+
+.container
+{
+  margin: 0 auto;
+  max-width: 80%;
+  border: 1px solid black;
+}

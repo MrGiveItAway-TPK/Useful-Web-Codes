@@ -1,0 +1,15 @@
+#wallpaper_img {
+    height:500px;
+    transition: all 0.5s linear;
+    filter: grayscale(100%);
+}
+
+#wallpaper_img:hover {
+    filter: grayscale(0%);
+}
+
+.rainbow-text {
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
