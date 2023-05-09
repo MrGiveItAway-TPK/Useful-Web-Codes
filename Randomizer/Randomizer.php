@@ -1,1 +1,34 @@
-<?php$Used_Data = [];$Data=["Munes","Abood","Wesam","Adam","Wajdy","Mahdi","Muhammad"];class Randomizer {	    function Randomizer() {				global $Used_Data;		global $Data;				Randomizer:		$Data_Temp=rand(0,sizeof($Data)-1);				if (!in_array($Data_Temp, $Used_Data))		{        $this->node = $Data[$Data_Temp];		array_push($Used_Data,$Data_Temp);		}		else {		goto Randomizer;		}		}}echo '<center><h1>Randomizer</h1></center>';flush();ob_flush();for($i = 1; $i <= sizeof($Data); $i++) {	    $Randomizer = new Randomizer();	echo "<center>".$Randomizer->node."</center><br><hr>";    	flush();ob_flush();	sleep(1); //Remove this if you dont want to make it look like its loading or if you want all data printed fast}?>
+<?php
+
+$data = ["Munes", "Muhammad", "Sara", "Abood", "As7ar", "Nardeen", "Mousa", "Wajdey", "Batoteh"];
+$usedIndices = [];
+
+class Randomizer {
+    public $node;
+    
+    function __construct($node) {
+        $this->node = $node;
+    }
+}
+
+echo '<center><h1>Randomizer</h1></center>';
+
+for ($i = 1; $i <= count($data); $i++) {
+    $randomIndex = rand(0, count($data) - 1);
+    
+    while (in_array($randomIndex, $usedIndices)) {
+        $randomIndex = rand(0, count($data) - 1);
+    }
+    
+    $usedIndices[] = $randomIndex;
+    $randomnode = $data[$randomIndex];
+    
+    $randomizer = new Randomizer($randomnode);
+    
+    echo "<center>{$i}. {$randomizer->node}</center><br><hr>";
+    flush();
+    ob_flush();
+    sleep(1); // Remove this if you don't want to delay the output
+}
+
+?>

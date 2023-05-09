@@ -1,1 +1,38 @@
-<?php$Used_Data = [];$Data=["Munes","Abood","Wesam","Adam","Wajdy","Mahdi"];class Randomizer {	    function Randomizer() {				global $Used_Data;		global $Data;				Randomizer:		$Data_Temp=rand(0,sizeof($Data)-1);				if (!in_array($Data_Temp, $Used_Data))		{        $this->node = $Data[$Data_Temp];		array_push($Used_Data,$Data_Temp);		}		else {		goto Randomizer;		}		}}$switcher=0;echo '<center><h1>Randomizer - Versus Edition</h1></center>';flush();ob_flush();for($i = 1; $i <= sizeof($Data); $i++) {	    $Randomizer = new Randomizer();		if($switcher==1) {	echo "<center>".$Temp_Rand."<b style='color:red;'> vs </b>".$Randomizer->node."</center><br><hr>";    flush();ob_flush();	$switcher=0;	sleep(1); //Remove this if you dont want to make it look like its loading or if you want all data printed fast	}	else	{	$Temp_Rand=$Randomizer->node;	$switcher=1;	}	}?>
+<?php
+
+$usedData = [];
+$data = ["Munes", "Sara", "Batoteh", "Muhammad", "Ashar", "Wajdey"];
+
+class Randomizer {
+    public $node;
+
+    function __construct($data) {
+        $this->node = $data[array_rand($data)];
+    }
+}
+
+echo '<center><h1>Randomizer - Versus Edition</h1></center>';
+flush();
+ob_flush();
+
+$previousNode = null;
+$i=1;
+while (count($usedData) < count($data)) {
+    $availableData = array_diff($data, $usedData);
+    $randomizer = new Randomizer($availableData);
+
+    if ($previousNode && $randomizer->node !== $previousNode) {
+        echo "<center>{$i}. {$previousNode} <b style='color:red;'> VS </b> {$randomizer->node}</center><br><hr>";
+		$i++;
+        flush();
+        ob_flush();
+        sleep(1);
+        $previousNode = null;
+        array_push($usedData, $randomizer->node);
+    } elseif (!$previousNode) {
+        $previousNode = $randomizer->node;
+        array_push($usedData, $previousNode);
+    }
+}
+
+?>
